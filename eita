@@ -1,15 +1,15 @@
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/LibraryV2/main/redzLib"))()
 
-local Window = redzlib:CreateWindow({
-    Title = "🥭Manga Hub🥭| Beta | Brookhaven RP🏡| V1.3 | 🇧🇷 Português 🇧🇷",
+local Window = redzlib:Window({
+    Title = "🥭Manga Hub🥭 | Beta | Brookhaven RP🏡| V1.3 | 🇧🇷 Português 🇧🇷",
     Subtitle = "Anti Mandrake",
     SaveFolder = "RedzConfig"
 })
 
 -- Aba "Troll"
-local TrollTab = Window:CreateTab("Troll")
+local TrollTab = Window:Tab("Troll")
 
-TrollTab:CreateButton({
+TrollTab:Button({
     Name = "Lagar Jogo",
     Callback = function()
         teleportGhostMeter()
@@ -17,34 +17,34 @@ TrollTab:CreateButton({
 })
 
 -- Aba "Item"
-local ItemTab = Window:CreateTab("Item")
+local ItemTab = Window:Tab("Item")
 
-ItemTab:CreateButton({
+ItemTab:Button({
     Name = "Dupe Livro",
     Callback = function()
         dupeBook()
     end
 })
 
-ItemTab:CreateButton({
+ItemTab:Button({
     Name = "Dupe Extintor",
     Callback = function()
         dupeExtintor()
     end
 })
 
-ItemTab:CreateButton({
+ItemTab:Button({
     Name = "Dupe Bola de Basquete",
     Callback = function()
         dupeBolaDeBasquete()
     end
 })
 
-ItemTab:CreateButton({
+ItemTab:Button({
     Name = "Dupe Maca",
     Callback = function()
         dupeStretcher()
     end
 })
 
-redzlib:Init()
+redzlib:Initialize()
