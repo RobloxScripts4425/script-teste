@@ -1,50 +1,80 @@
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/LibraryV2/main/redzLib"))()
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
 
-local Window = redzlib:Window({
-    Title = "🥭Manga Hub🥭 | Beta | Brookhaven RP🏡| V1.3 | 🇧🇷 Português 🇧🇷",
-    Subtitle = "Anti Mandrake",
-    SaveFolder = "RedzConfig"
+local Window = OrionLib:MakeWindow({
+    Name = "🥭Manga Hub🥭 | Beta | Brookhaven RP🏡| V1.3 | 🇧🇷 Português 🇧🇷",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "OrionConfig"
 })
 
--- Aba "Troll"
-local TrollTab = Window:Tab("Troll")
+-- Funções dos Botões
+local function dupeBook()
+    -- Insira aqui o código para duplicar o Livro
+end
 
-TrollTab:Button({
+local function dupeExtintor()
+    -- Insira aqui o código para duplicar o Extintor
+end
+
+local function dupeBolaDeBasquete()
+    -- Insira aqui o código para duplicar a Bola de Basquete
+end
+
+local function dupeStretcher()
+    -- Insira aqui o código para duplicar a Maca
+end
+
+local function teleportGhostMeter()
+    -- Insira aqui o código para lagar o jogo usando o Ghost Meter
+end
+
+-- Aba Troll
+local TrollTab = Window:MakeTab({
+    Name = "Troll",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+TrollTab:AddButton({
     Name = "Lagar Jogo",
     Callback = function()
         teleportGhostMeter()
     end
 })
 
--- Aba "Item"
-local ItemTab = Window:Tab("Item")
+-- Aba Item
+local ItemTab = Window:MakeTab({
+    Name = "Item",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
 
-ItemTab:Button({
+ItemTab:AddButton({
     Name = "Dupe Livro",
     Callback = function()
         dupeBook()
     end
 })
 
-ItemTab:Button({
+ItemTab:AddButton({
     Name = "Dupe Extintor",
     Callback = function()
         dupeExtintor()
     end
 })
 
-ItemTab:Button({
+ItemTab:AddButton({
     Name = "Dupe Bola de Basquete",
     Callback = function()
         dupeBolaDeBasquete()
     end
 })
 
-ItemTab:Button({
+ItemTab:AddButton({
     Name = "Dupe Maca",
     Callback = function()
         dupeStretcher()
     end
 })
 
-redzlib:Initialize()
+OrionLib:Init()
