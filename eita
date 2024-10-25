@@ -1,211 +1,50 @@
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/LibraryV2/main/redzLib"))()
 
-local Window = redzlib:MakeWindow({
-    Title = "🥭Manga Hub🥭| Beta | Brookhaven RP🏡| V1.3 | 🇧🇷 Português 🇧BR | ",
-    SubTitle = "Anti Mandrake",
-    SaveFolder = "Redz Config"
+local Window = redzlib:CreateWindow({
+    Title = "🥭Manga Hub🥭| Beta | Brookhaven RP🏡| V1.3 | 🇧🇷 Português 🇧🇷",
+    Subtitle = "Anti Mandrake",
+    SaveFolder = "RedzConfig"
 })
-
-local selectedAngle = "X"
-local distance = 0
-
-local function dupeBook()
-    local bookPath = workspace:FindFirstChild("WorkspaceCom"):FindFirstChild("001_DayCare"):FindFirstChild("Tools"):FindFirstChild("Book")
-    if bookPath then
-        local teleportCount = 0
-        local maxTeleports = 450
-        local function clickBook()
-            local clickDetector = bookPath:FindFirstChildWhichIsA("ClickDetector")
-            if clickDetector then
-                fireclickdetector(clickDetector)
-            end
-        end
-        local function repeatTeleportAndClick()
-            if teleportCount < maxTeleports then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = bookPath.CFrame
-                teleportCount = teleportCount + 1
-                clickBook()
-                wait(0.01)
-                repeatTeleportAndClick()
-            end
-        end
-        repeatTeleportAndClick()
-    end
-end
-
-local function dupeExtintor()
-    local fireXPath = workspace:FindFirstChild("WorkspaceCom"):FindFirstChild("001_GiveTools"):FindFirstChild("FireX")
-    if fireXPath then
-        local teleportCount = 0
-        local maxTeleports = 450
-        local function clickFireX()
-            local clickDetector = fireXPath:FindFirstChildWhichIsA("ClickDetector")
-            if clickDetector then
-                fireclickdetector(clickDetector)
-            end
-        end
-        local function repeatTeleportAndClick()
-            if teleportCount < maxTeleports then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = fireXPath.CFrame
-                teleportCount = teleportCount + 1
-                clickFireX()
-                wait(0.01)
-                repeatTeleportAndClick()
-            end
-        end
-        repeatTeleportAndClick()
-    end
-end
-
-local function dupeBolaDeBasquete()
-    local basketballPath = workspace:FindFirstChild("WorkspaceCom"):FindFirstChild("001_GiveTools"):FindFirstChild("Basketball")
-    if basketballPath then
-        local teleportCount = 0
-        local maxTeleports = 450
-        local function clickBasketball()
-            local clickDetector = basketballPath:FindFirstChildWhichIsA("ClickDetector")
-            if clickDetector then
-                fireclickdetector(clickDetector)
-            end
-        end
-        local function repeatTeleportAndClick()
-            if teleportCount < maxTeleports then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = basketballPath.CFrame
-                teleportCount = teleportCount + 1
-                clickBasketball()
-                wait(0.01)
-                repeatTeleportAndClick()
-            end
-        end
-        repeatTeleportAndClick()
-    end
-end
-
-local function dupeStretcher()
-    local stretcherPath = workspace:FindFirstChild("WorkspaceCom"):FindFirstChild("001_GiveTools"):FindFirstChild("Stretcher")
-    if stretcherPath then
-        local teleportCount = 0
-        local maxTeleports = 450
-        local function clickStretcher()
-            local clickDetector = stretcherPath:FindFirstChildWhichIsA("ClickDetector")
-            if clickDetector then
-                fireclickdetector(clickDetector)
-            end
-        end
-        local function repeatTeleportAndClick()
-            if teleportCount < maxTeleports then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = stretcherPath.CFrame
-                teleportCount = teleportCount + 1
-                clickStretcher()
-                wait(0.01)
-                repeatTeleportAndClick()
-            end
-        end
-        repeatTeleportAndClick()
-    end
-end
-
-local function lagarJogo()
-    local ghostMeterPath = workspace:FindFirstChild("WorkspaceCom"):FindFirstChild("001_GiveTools"):FindFirstChild("GhostMeter")
-    if ghostMeterPath then
-        local clickCount = 0
-        local maxClicks = 100000000000 -- Número de cliques
-        local function clickGhostMeter()
-            local clickDetector = ghostMeterPath:FindFirstChildWhichIsA("ClickDetector")
-            if clickDetector then
-                fireclickdetector(clickDetector)
-            end
-        end
-        local function repeatClick()
-            if clickCount < maxClicks then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = ghostMeterPath.CFrame
-                clickGhostMeter()
-                clickCount = clickCount + 1
-                wait(0.01)
-                repeatClick()
-            end
-        end
-        repeatClick()
-    end
-end
-
-local function gripItem()
-    local character = game.Players.LocalPlayer.Character
-    local tool = character:FindFirstChildOfClass("Tool")
-    
-    if tool then
-        -- Calcular a nova posição com base no ângulo e na distância
-        local offset = Vector3.new(
-            selectedAngle == "X" and distance or 0,
-            selectedAngle == "Y" and distance or 0,
-            selectedAngle == "Z" and distance or 0
-        )
-        
-        -- Mover o item para a nova posição
-        tool.CFrame = character.HumanoidRootPart.CFrame * CFrame.new(offset)
-    end
-end
 
 -- Aba "Troll"
-local TabTroll = Window:MakeTab({
-    Name = "Troll",
-    Icon = "rbxassetid://4483345998",
-    Premium = false
-})
+local TrollTab = Window:CreateTab("Troll")
 
-TabTroll:AddButton({
+TrollTab:CreateButton({
     Name = "Lagar Jogo",
-    Callback = lagarJogo
+    Callback = function()
+        teleportGhostMeter()
+    end
 })
 
 -- Aba "Item"
-local TabItem = Window:MakeTab({
-    Name = "Item",
-    Icon = "rbxassetid://4483345998",
-    Premium = false
-})
+local ItemTab = Window:CreateTab("Item")
 
-TabItem:AddDropdown({
-    Name = "Selecione o Ângulo",
-    Options = {"X", "Y", "Z"},
-    Default = "X",
-    Callback = function(value)
-        selectedAngle = value
+ItemTab:CreateButton({
+    Name = "Dupe Livro",
+    Callback = function()
+        dupeBook()
     end
 })
 
-TabItem:AddTextBox({
-    Name = "Distância",
-    Default = "0",
-    TextDisappear = false,
-    Callback = function(value)
-        distance = tonumber(value) or 0
+ItemTab:CreateButton({
+    Name = "Dupe Extintor",
+    Callback = function()
+        dupeExtintor()
     end
 })
 
-TabItem:AddButton({
-    Name = "Fazer Grip Item",
-    Callback = gripItem
+ItemTab:CreateButton({
+    Name = "Dupe Bola de Basquete",
+    Callback = function()
+        dupeBolaDeBasquete()
+    end
 })
 
-TabItem:AddButton({
-    Name = "Duplicar Livro",
-    Callback = dupeBook
+ItemTab:CreateButton({
+    Name = "Dupe Maca",
+    Callback = function()
+        dupeStretcher()
+    end
 })
 
-TabItem:AddButton({
-    Name = "Duplicar Extintor",
-    Callback = dupeExtintor
-})
-
-TabItem:AddButton({
-    Name = "Duplicar Bola de Basquete",
-    Callback = dupeBolaDeBasquete
-})
-
-TabItem:AddButton({
-    Name = "Duplicar Maca",
-    Callback = dupeStretcher
-})
-
-Window:Init()
+redzlib:Init()
