@@ -1,80 +1,79 @@
-local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/LibraryV2/main/redzLib"))()
 
-local Window = OrionLib:MakeWindow({
-    Name = "🥭Manga Hub🥭 | Beta | Brookhaven RP🏡| V1.3 | 🇧🇷 Português 🇧🇷",
-    HidePremium = false,
-    SaveConfig = true,
-    ConfigFolder = "OrionConfig"
+local Window = RedzLib:CreateWindow({
+    Title = "🥭Manga Hub🥭| Beta | Brookhaven RP🏡| V1.3 | 🇧🇷 Português 🇧🇷 | ",
+    SubTitle = "Anti Mandrake",
+    SaveFolder = "Redz Config"
 })
 
--- Funções dos Botões
-local function dupeBook()
-    -- Insira aqui o código para duplicar o Livro
+local function dupeItem(itemName, maxTeleports)
+    local itemPath = workspace:FindFirstChild("WorkspaceCom"):FindFirstChild(itemName)
+    if itemPath then
+        local teleportCount = 0
+        local function clickItem()
+            local clickDetector = itemPath:FindFirstChildWhichIsA("ClickDetector")
+            if clickDetector then
+                fireclickdetector(clickDetector)
+            end
+        end
+        local function repeatTeleportAndClick()
+            if teleportCount < maxTeleports then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = itemPath.CFrame
+                teleportCount = teleportCount + 1
+                clickItem()
+                wait(0.01)
+                repeatTeleportAndClick()
+            end
+        end
+        repeatTeleportAndClick()
+    end
 end
 
-local function dupeExtintor()
-    -- Insira aqui o código para duplicar o Extintor
-end
-
-local function dupeBolaDeBasquete()
-    -- Insira aqui o código para duplicar a Bola de Basquete
-end
-
-local function dupeStretcher()
-    -- Insira aqui o código para duplicar a Maca
-end
-
-local function teleportGhostMeter()
-    -- Insira aqui o código para lagar o jogo usando o Ghost Meter
-end
-
--- Aba Troll
-local TrollTab = Window:MakeTab({
+local TabTroll = Window:MakeTab({
     Name = "Troll",
     Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+    Premium = false
 })
 
-TrollTab:AddButton({
+TabTroll:AddButton({
     Name = "Lagar Jogo",
     Callback = function()
-        teleportGhostMeter()
+        dupeItem("GhostMeter", 100000000000)
     end
 })
 
--- Aba Item
-local ItemTab = Window:MakeTab({
+local TabItem = Window:MakeTab({
     Name = "Item",
     Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+    Premium = false
 })
 
-ItemTab:AddButton({
+TabItem:AddButton({
     Name = "Dupe Livro",
     Callback = function()
-        dupeBook()
+        dupeItem("Book", 450)
     end
 })
 
-ItemTab:AddButton({
+TabItem:AddButton({
     Name = "Dupe Extintor",
     Callback = function()
-        dupeExtintor()
+        dupeItem("FireX", 450)
     end
 })
 
-ItemTab:AddButton({
+TabItem:AddButton({
     Name = "Dupe Bola de Basquete",
     Callback = function()
-        dupeBolaDeBasquete()
+        dupeItem("Basketball", 450)
     end
 })
 
-ItemTab:AddButton({
+TabItem:AddButton({
     Name = "Dupe Maca",
     Callback = function()
-        dupeStretcher()
+        dupeItem("Stretcher", 100)
     end
 })
 
-OrionLib:Init()
+RedzLib:Init()
